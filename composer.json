@@ -1,17 +1,17 @@
 {
-  "name": "begateway/magento2-payment-module",
-  "description": "BeGateway Magento 2 payment module",
+  "name": "sparepay/magento2-payment-module",
+  "description": "Spare Payment Magento 2 payment module",
   "type": "magento2-module",
-  "version": "2.3.0",
+  "version": "1.0.0",
   "license": [
     "OSL-3.0",
     "AFL-3.0"
   ],
   "authors": [
       {
-          "name": "beGateway",
-          "email": "techsupport@begateway.com",
-          "homepage": "https://begateway.com"
+          "name": "SparePay",
+          "email": "ybentaher@tryspare.com",
+          "homepage": "https://tryspare.com"
       }
   ],
   "keywords": [
