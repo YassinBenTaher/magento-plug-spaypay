@@ -1,0 +1,77 @@
+<?php
+/*
+ * Copyright (C) 2017 beGateway
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * @author      beGateway
+ * @copyright   2017 beGateway
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU General Public License, version 2 (GPL-2.0)
+ */
+
+namespace SparePay\SparePay\Controller\Ipn;
+
+use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\Request\InvalidRequestException;
+use Magento\Framework\App\RequestInterface;
+
+/**
+ * Unified IPN controller for all supported beGateway Payment Methods
+ * Class Index
+ * @package SparePay\SparePay\Controller\Ipn
+ */
+class Index extends \SparePay\SparePay\Controller\AbstractAction implements CsrfAwareActionInterface
+{
+
+    /**
+     * Instantiate IPN model and pass IPN request to it
+     *
+     * @return void
+     */
+    public function execute()
+    {
+        if (!$this->getRequest()->isPost()) {
+            return;
+        }
+
+        try {
+          $ipn = $this->getObjectManager()->create(
+              "SparePay\\SparePay\\Model\\Ipn\\BeGatewayIpn"
+          );
+
+          $responseBody = $ipn->handleBeGatewayNotification();
+          $this->getResponse()
+              ->setHeader('Content-type', 'text/html')
+              ->setBody($responseBody['body'])
+              ->setHttpResponseCode($responseBody['code'])
+              ->sendResponse();
+        } catch (\Exception $e) {
+            $this->getLogger()->critical($e);
+            $this->getResponse()->setHttpResponseCode(500);
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateForCsrf(RequestInterface $request): ?bool
+    {
+        return true;
+    }
+}
