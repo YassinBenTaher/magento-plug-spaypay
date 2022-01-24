@@ -21,7 +21,13 @@ This is a Payment Module for Magento 2 Community Edition, that gives you the abi
     $ php bin/magento setup:upgrade
     ```
 
-  * Deploy Magento Static Content (__Execute If needed__)
+  * If you are not running your Magento installation in compiled mode, skip to the next step. If you are running in compiled mode, complete this step:
+
+    ```sh
+    $ php bin/magento setup:di:compile
+    ```
+
+  * Deploy Magento Static Content
 
     ```sh
     $ php bin/magento setup:static-content:deploy -f
