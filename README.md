@@ -7,7 +7,39 @@ This is a Payment Module for Magento 2 Community Edition, that gives you the abi
   * Magento 2 Community Edition 2.x (Tested up to 2.3.7 / 2.4.2)
   * Composer 2.x
 
-## Installation
+## Installation (composer)
+
+  * Install __Composer__ - [Composer Download Instructions](https://getcomposer.org/doc/00-intro.md)
+
+  * Install Payment Module
+
+    ```sh
+    $ composer require begateway/magento2-payment-module
+    ```
+
+  * Enable Payment Module
+
+    ```sh
+    $ php bin/magento module:enable SparePay_SparePay
+    ```
+
+    ```sh
+    $ php bin/magento setup:upgrade
+    ```
+
+  * If you are not running your Magento installation in compiled mode, skip to the next step. If you are running in compiled mode, complete this step:
+
+    ```sh
+    $ php bin/magento setup:di:compile
+    ```
+
+  * Deploy Magento Static Content (__Execute If needed__)
+
+    ```sh
+    $ php bin/magento setup:static-content:deploy en_GB en_US
+    ```
+
+## Installation (manual)
 
   * Download the Payment Module , unpack it and upload its contents to a new folder ```<root>/app/code/SparePay/SparePay/``` of your Magento 2 installation
 
