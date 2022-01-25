@@ -14,7 +14,7 @@ This is a Payment Module for Magento 2 Community Edition, that gives you the abi
   * Install Payment Module
 
     ```sh
-    $ composer require begateway/magento2-payment-module
+    $ composer require sparepay/magento2-payment-module
     ```
 
   * Enable Payment Module
